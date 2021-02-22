@@ -1,13 +1,23 @@
-package com.pedro.ceperizador.model;
+package com.pedro.ceperizador.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
+
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Cep {
+@Entity
+
+public class Cep implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String cep;
     private String logradouro;
     private String complemento;
