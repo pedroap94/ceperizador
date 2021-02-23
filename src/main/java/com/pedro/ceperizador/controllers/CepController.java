@@ -2,8 +2,10 @@ package com.pedro.ceperizador.controllers;
 
 import com.pedro.ceperizador.dto.Cep;
 import com.pedro.ceperizador.integrations.CepFeign;
+import com.pedro.ceperizador.services.CepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CepController {
 
     @Autowired
-    CepFeign cepFeign;
+    CepService cepService;
 
-    @GetMapping()
-    public Cep getCep(){
-        return cepFeign.getCepById("13082660");
+    @GetMapping("/{cep}")
+    public Cep getCep(@PathVariable String cep) {
+        return cepService.getCepById(cep);
     }
 }
+
