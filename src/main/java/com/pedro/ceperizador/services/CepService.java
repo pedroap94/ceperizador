@@ -47,13 +47,22 @@ public class CepService {
     public Cep getCepById(String cep) {
         String cepVerify = digitsOnly(cep); //retorna apenas os números do CEP digitado
         if (cepVerify.length() == 8) {
-            if (cepRepository.getByCep(cepVerify) == null){
+            StringBuilder stringBuilder = new StringBuilder(cepVerify); //utilizado StringBuilder para gerar o cep igual ao que é salvo no banco com hífen
+            stringBuilder.insert(5,'-');
+            System.out.println(stringBuilder.toString());
+
+            //se não existir cep no banco, busca na api e cria o registro no banco.
+            if (cepRepository.getByCep(stringBuilder.toString()) == null){
                 Cep cepAux = cepFeign.getCepById(cepVerify);
                 cepRepository.save(cepAux);
                 return cepAux;
+
+            //caso exista, retorna o registro do banco.
             } else{
-                return cepRepository.getByCep(cepVerify);
+                return cepRepository.getByCep(stringBuilder.toString());
             }
+
+        //se o cep inserido contiver mais ou menos do que 8 números, retorna null.
         } else {
             return null;
         }
