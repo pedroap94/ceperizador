@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Classe controller onde estão os EndPoints da aplicação para receber o GET com o Cep
+ */
 @RestController
 @RequestMapping("cep")
 public class CepController {
