@@ -12,7 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-
 public class Cep implements Serializable {
     private static final long serialVersionUID = 1L;
 

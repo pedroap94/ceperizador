@@ -4,8 +4,11 @@ import com.pedro.ceperizador.dto.Cep;
 import com.pedro.ceperizador.integrations.CepFeign;
 import com.pedro.ceperizador.repositories.CepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -27,7 +30,9 @@ public class CepService {
      * @param palavra
      * @return digits
      */
-    public static String digitsOnly(String palavra){
+
+    //olhar regex
+    private static String digitsOnly(String palavra){
         String digits = "";
         char[] letras = palavra.toCharArray();
         for(char letra : letras){
@@ -49,24 +54,20 @@ public class CepService {
         if (cepVerify.length() == 8) {
             StringBuilder stringBuilder = new StringBuilder(cepVerify); //utilizado StringBuilder para gerar o cep igual ao que é salvo no banco com hífen
             stringBuilder.insert(5,'-');
-            System.out.println(stringBuilder.toString());
 
             //se não existir cep no banco, busca na api e cria o registro no banco.
-            if (cepRepository.getByCep(stringBuilder.toString()) == null){
-                Cep cepAux = cepFeign.getCepById(cepVerify);
-                cepRepository.save(cepAux);
-                return cepAux;
+            Cep cep2 = cepRepository.getByCep(stringBuilder.toString());
+            if (Objects.isNull(cep2)){
+                return cepRepository.save(cepFeign.getCepById(cepVerify));
 
             //caso exista, retorna o registro do banco.
             } else{
-                return cepRepository.getByCep(stringBuilder.toString());
+                return cep2;
             }
 
         //se o cep inserido contiver mais ou menos do que 8 números, retorna null.
         } else {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CEP não encontrado.");
         }
-
     }
-
 }
