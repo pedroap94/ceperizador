@@ -1,10 +1,11 @@
-package com.pedro.ceperizador.dto;
+package com.pedro.ceperizador.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 

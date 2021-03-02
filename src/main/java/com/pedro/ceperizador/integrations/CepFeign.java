@@ -1,6 +1,6 @@
 package com.pedro.ceperizador.integrations;
 
-import com.pedro.ceperizador.dto.Cep;
+import com.pedro.ceperizador.entities.Cep;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
