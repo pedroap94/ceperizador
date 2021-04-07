@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: pedro
+Build-Jdk: version 11.0.9
+Implementation-Title: ceperizador
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.pedro.ceperizador
+Main-Class: ${start-class}
+
