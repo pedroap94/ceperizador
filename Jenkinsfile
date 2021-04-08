@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    tools{
+        maven 'maven_local_10'
+        jdk 'java_local_11'
+    }
     stages{
         stage('Build Backend'){
             steps{
