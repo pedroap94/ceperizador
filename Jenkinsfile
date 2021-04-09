@@ -35,7 +35,7 @@ pipeline{
         }
         stage('Tomcat Deploy'){
             steps{
-                deploy adapters: [tomcat8(credentialsId: 'github_login', path: '', url: 'http://localhost:8001')], contextPath: null, war: 'targets/ceperizador-app.war'
+                deploy adapters: [tomcat8(credentialsId: 'github_login', path: '', url: 'http://localhost:8001')], contextPath: null, war: 'target/ceperizador-app.war'
             }
         }
     }
