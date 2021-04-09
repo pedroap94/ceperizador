@@ -25,6 +25,18 @@ pipeline{
                 }
             }
         }
+        stage('Quality Gate'){
+            steps{
+                sleep(5)
+                timeout(time: 1, unit: 'MINUTES'){
+                    waitForQualityGate abortPipeline:true
+                }
+            }
+        }
+        stage('Tomcat Deploy'){
+            steps{
+                deploy adapters: [tomcat8(credentialsId: 'github_login', path: '', url: 'http://localhost:8001')], contextPath: null, war: 'targets/ceperizador-app.war'
+            }
+        }
     }
 }
-
