@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.http.HttpResponse;
-
 /**
  * Classe controller onde estão os EndPoints da aplicação para receber o GET com o Cep
  */
